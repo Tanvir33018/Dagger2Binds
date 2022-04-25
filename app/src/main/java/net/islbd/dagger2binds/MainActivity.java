@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import net.islbd.dagger2binds.models.Car;
+import net.islbd.dagger2binds.models.modules.PetrolEngineModules;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,7 +15,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        applicationComponent = DaggerApplicationComponent.create();
+        applicationComponent = DaggerApplicationComponent.builder()
+                .petrolEngineModules(new PetrolEngineModules(100))
+                .build();
         car = applicationComponent.getCar();
 
         car.drive();

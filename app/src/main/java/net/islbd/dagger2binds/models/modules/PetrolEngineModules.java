@@ -10,8 +10,16 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-public abstract class PetrolEngineModules {
+public class PetrolEngineModules {
 
-    @Binds
-    abstract Engine bindsEngine(PetrolEngine engine);
+    private int horsePower;
+
+    public PetrolEngineModules(int horsePower) {
+        this.horsePower = horsePower;
+    }
+
+    @Provides
+     Engine providesEngine(){
+        return new PetrolEngine(horsePower);
+    };
 }
